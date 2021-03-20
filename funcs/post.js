@@ -61,18 +61,17 @@ const deletePost = async (id) => {
 exports.handler = async (event, context) => {
 
     let res = {};
+    const params = JSON.parse(event.body);
 
     switch (event.httpMethod) {
         case 'GET':
             res = await getPosts();
             break;
         case 'POST':
-            const params = JSON.parse(event.body);
             const content = params.content || "empty";
             res = await addPost(content);
             break;
         case 'DELETE':
-            const params = JSON.parse(event.body);
             const id = params.id || 0;
             res = await deletePost(id);
             break;
